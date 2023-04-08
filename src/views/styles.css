@@ -1,0 +1,17 @@
+.back {
+    /* display: flex; */
+    position: absolute;
+    background-color: rgb(150, 234, 206);
+    top: 0;
+    left: 25%;
+    width: 200;
+    height: 100%;
+    padding: 12% 0;
+    /* align-items: center;
+    justify-content: center; */
+
+}
+
+.login {
+    margin: 34px;
+}
