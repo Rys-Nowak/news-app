@@ -5,6 +5,56 @@
   text-align: center;
 }
 
+.back {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background-color: rgb(124, 214, 205);
+  top: 0;
+  left: 25%;
+  width: 200;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 16px #719ECE;
+}
+
+.login {
+  margin: 34px;
+  margin-top: -15px;
+}
+
+.welcome {
+  color: #373737;
+  margin-left: 350px;
+  margin-top: -20px;
+  font-size: 100px;
+  text-shadow: 0 0 24px #000000;
+}
+
+.signInHeader {
+  margin-top: -35px;
+  color: #242424;
+}
+
+.registerButton {
+  color: #242424;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+}
+
+.registerButton:focus {
+  color: #dcefff;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  text-shadow: 0 0 8px #ffffff;
+  box-shadow: none;
+}
+
+.error {
+  margin-bottom: 46px;
+}
+
 /* .logo {
   height: 6em;
   padding: 1.5em;

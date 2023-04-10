@@ -1,13 +1,17 @@
-import { useState, useEffect } from 'react'
-import LoginScreen from './views/loginScreen' 
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Welcome from "./pages/welcomePage";
+import Home from "./pages/homePage";
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <LoginScreen />
-    </div>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Welcome />} />
+        <Route path="/home" element={<Home />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
