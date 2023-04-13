@@ -8,7 +8,7 @@ function Welcome() {
   return (
     <div>
       <h1 className="welcome">Welcome!</h1>
-      <div className="back">
+      <div className="backStripe">
         {register ? <SignUpForm back={setRegister} /> : <SignInForm reg={setRegister} />}
       </div>
     </div>

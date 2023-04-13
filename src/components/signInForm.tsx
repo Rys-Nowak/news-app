@@ -8,11 +8,11 @@ function handleChange(set: React.Dispatch<React.SetStateAction<string>>) {
 }
 
 type SignInFormProps = {
-  reg: any;
+  reg: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 function SignInForm({ reg }: SignInFormProps) {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   return (
@@ -21,8 +21,8 @@ function SignInForm({ reg }: SignInFormProps) {
       <form className="login">
         <input
           type="text"
-          placeholder="Email"
-          onChange={handleChange(setEmail)}
+          placeholder="Username"
+          onChange={handleChange(setUsername)}
         />
         <br />
         <input
@@ -34,7 +34,7 @@ function SignInForm({ reg }: SignInFormProps) {
         <Link to="/home">
           <button
             type="submit"
-            className="signIn"
+            className="signInButton"
             onClick={() => {
               // if
               // sign in
@@ -44,7 +44,7 @@ function SignInForm({ reg }: SignInFormProps) {
           </button>
         </Link>
         <br />
-        <button className="registerButton" onClick={reg}>
+        <button className="registerButton" onClick={() => reg(true)}>
           Register
         </button>
       </form>

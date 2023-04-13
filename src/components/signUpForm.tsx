@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink as Link } from "react-router-dom";
 
 type SignUpFormProps = {
-  back: any;
+  back: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 function handleChange(set: React.Dispatch<React.SetStateAction<string>>) {
@@ -11,31 +11,16 @@ function handleChange(set: React.Dispatch<React.SetStateAction<string>>) {
   };
 }
 
-/**
- * Checks if the email is valid
- * @param {string} email
- * @returns {boolean} true if valid, false otherwise
- */
-const validateEmail = (email: string): boolean => {
-  return (
-    String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      ) !== null
-  );
-};
-
 function SignUpForm({ back }: SignUpFormProps) {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
   const [passwordsMatch, setPasswordsMatch] = useState(true);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    if (email.length > 0 && !validateEmail(email)) {
-      setMessage("Invalid email!");
+    if (username.length > 0 && username.length < 5) {
+      setMessage("Username too short!");
     } else if (!passwordsMatch && confirmedPassword.length > 0) {
       setMessage("Different passwords!");
     } else if (
@@ -47,7 +32,7 @@ function SignUpForm({ back }: SignUpFormProps) {
     } else {
       setMessage("");
     }
-  }, [password, confirmedPassword, email]);
+  }, [password, confirmedPassword, username]);
 
   useEffect(() => {
     setPasswordsMatch(password === confirmedPassword);
@@ -59,8 +44,8 @@ function SignUpForm({ back }: SignUpFormProps) {
       <form className="login">
         <input
           type="text"
-          placeholder="Email address"
-          onChange={handleChange(setEmail)}
+          placeholder="Username"
+          onChange={handleChange(setUsername)}
         />
         <br />
         <input
@@ -78,7 +63,7 @@ function SignUpForm({ back }: SignUpFormProps) {
         <Link to="/home">
           <button
             type="submit"
-            className="signIn"
+            className="signInButton"
             onClick={() => {
               // if
               // sign up
@@ -91,12 +76,7 @@ function SignUpForm({ back }: SignUpFormProps) {
         {message !== "" ? (
           <p className="error">{message}</p>
         ) : (
-          <button
-            className="registerButton"
-            onClick={() => {
-              back(false);
-            }}
-          >
+          <button className="registerButton" onClick={() => back(false)}>
             Go back
           </button>
         )}
