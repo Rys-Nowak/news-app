@@ -1,16 +1,15 @@
-type CardProps = {
-  title: string;
-  description: string;
-  tags?: string[];
-  link: string;
-};
+import { SearchResult } from "../search/searchResult";
 
-function Card({ title, description, tags, link }: CardProps) {
+
+function Card(props: Partial<SearchResult>) {
   return (
-    <a href={link} className="card">
-      <h4>{title}</h4>
-      <p>{description}</p>
+    <div  className="card">
+    <a href={props.url}>
+      <h4>{props.name}</h4>
+      <p className="description">{props.description}</p>
+      <text>{new Date(props.datePublished ?? "").toDateString()}</text>
     </a>
+    </div>
   );
 }
 

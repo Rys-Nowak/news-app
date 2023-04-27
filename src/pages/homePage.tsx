@@ -1,46 +1,44 @@
+import { useEffect, useState } from "react";
 import Card from "../components/card";
+import { SearchService } from "../search/searchService";
+import { SearchResult } from "../search/searchResult";
+
+function searchByKeyword(searchService: SearchService, keyword: string) {
+  searchService.search(keyword);
+}
 
 function Home() {
+  const [searchService, setSearchService] = useState<SearchService>(SearchService.getInstance());
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+
+  useEffect(() => {
+    searchService.search("spacex").then((results) => {
+      setSearchResults(results);
+    }).catch((error) => {
+      alert(error);
+    });
+  }, []);
+
   return (
     <div className="background">
       <div className="mainSpace">
         <input className="searchBar" type="text" placeholder="Search for..." />
+        <button className="plusButton">X</button>
         <button className="searchButton">Search</button>
         <div className="cardContainer">
-          <Card
-            title="Title"
-            description="DescriptionDescription DescriptionDescription"
-            tags={["tag1", "tag2"]}
-            link="https://www.google.com"
-          />
-          <Card
-            title="Title"
-            description="DescriptionDescri ptionDescriptionDescrip tionDescriptionD escriptionDescriptionDesc riptionDescripti onDescription"
-            tags={["tag1", "tag2"]}
-            link="https://www.google.com"
-          />
-          <Card
-            title="Title"
-            description="Description"
-            tags={["tag1", "tag2"]}
-            link="https://www.google.com"
-          />
-          <Card
-            title="Title"
-            description="DescriptionDescri ptionDescriptionDescripti onDescriptionDescription"
-            tags={["tag1", "tag2"]}
-            link="https://www.google.com"
-          />
+          {searchResults.map((result) => {
+            return <Card name={result.name} url={result.url} description={result.description} datePublished={result.datePublished}/>;
+          })}
         </div>
       </div>
       <div className="leftStripe">
         <h2 className="hi">Hi username!</h2>
         <div>
-          <input className="addInput" type="text" placeholder="Watch new tag" />
+          <input className="addInput" type="text" placeholder="Add new topic" />
           <button className="plusButton">+</button>
         </div>
         <div className="tagContainer">
-          
+
         </div>
       </div>
     </div>
